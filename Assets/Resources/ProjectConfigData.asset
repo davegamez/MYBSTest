@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06e300208fa3ee04a99d031a99308441, type: 3}
+  m_Script: {fileID: 11500000, guid: 2950675d94144a146905a5fdedce8b90, type: 3}
   m_Name: ProjectConfigData
   m_EditorClassIdentifier: 
   projectID: 61b43b9c-4785-4e35-b80a-d063fcb523b0
   chainID: 56
   chain: Binance
   network: Mainnet
+  symbol: 
   rpc: https://bsc-mainnet.core.chainstack.com/371f622c2d36ef911bcc2865a5d5756a

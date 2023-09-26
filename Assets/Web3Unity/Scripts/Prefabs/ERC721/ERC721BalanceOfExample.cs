@@ -1,15 +1,42 @@
+using System.Collections;
 using System.Numerics;
+using System.Collections.Generic;
 using UnityEngine;
-using Web3Unity.Scripts.Library.ETHEREUEM.EIP;
 
 public class ERC721BalanceOfExample : MonoBehaviour
 {
     async void Start()
     {
-        string contract = "0x9123541E259125657F03D7AD2A7D1a8Ec79375BA";
-        string account = "0xd25b827D92b0fd656A1c829933e9b0b836d5C3e2";
+        string chain = "Binance";
+        string network = "Mainnet";
+        string contract = "0x2934f6e18b11eb55eA4aA7AFA3e24A6cEC95c17C";
+        string account = PlayerPrefs.GetString("Account");
 
-        BigInteger balance = await ERC721.BalanceOf(contract, account);
+        int balance = await ERC721.BalanceOf(chain, network, contract, account);
         print(balance);
+    }
+
+    async public void CheckNFT()
+    {
+        string chain = "Binance";
+        string network = "Mainnet";
+        string contract = "0x2934f6e18b11eb55eA4aA7AFA3e24A6cEC95c17C";
+        string account = PlayerPrefs.GetString("Account");
+        string RPC = PlayerPrefs.GetString("RPC");
+
+        Debug.Log("CHAIN: " + chain);
+        Debug.Log("NETWORK: " + network);
+        Debug.Log("ACCOUNT: " + account);
+        Debug.Log("CONTRACT: " + contract);
+        Debug.Log("RPC: " + RPC);
+
+        //BigInteger balanceOf = await ERC721.BalanceOf(contract, account);
+        int balance = await ERC721.BalanceOf(chain, network, contract, account);
+        print("NFT BALANCE: " + balance);
+
+        if (balance > 0)
+        {
+            // SceneManager.LoadScene(2);
+        }
     }
 }

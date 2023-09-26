@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 #if UNITY_WEBGL
 public class WebLogin : MonoBehaviour
 {
+    ProjectConfigScriptableObject projectConfigSO = null;
+
     [DllImport("__Internal")]
     private static extern void Web3Connect();
 
@@ -16,31 +18,28 @@ public class WebLogin : MonoBehaviour
     private static extern void SetConnectAccount(string value);
 
     private int expirationTime;
-    private string account;
-    ProjectConfigScriptableObject projectConfigSO = null;
-    
-    void Start()
-    {
-        // loads the data saved from the editor config
-        projectConfigSO = (ProjectConfigScriptableObject)Resources.Load("ProjectConfigData", typeof(ScriptableObject));
-        PlayerPrefs.SetString("ProjectID", projectConfigSO.ProjectID);
-        PlayerPrefs.SetString("ChainID", projectConfigSO.ChainID);
-        PlayerPrefs.SetString("Chain", projectConfigSO.Chain);
-        PlayerPrefs.SetString("Network", projectConfigSO.Network);
-        PlayerPrefs.SetString("RPC", projectConfigSO.RPC);
-    }
+    private string account; 
 
     public void OnLogin()
     {
         Web3Connect();
         OnConnected();
     }
+    
+    void Start() 
+    {
+        projectConfigSO = (ProjectConfigScriptableObject)Resources.Load("ProjectConfigData", typeof(ScriptableObject));
+        PlayerPrefs.SetString("ProjectID", projectConfigSO.ProjectId);
+        PlayerPrefs.SetString("ChainID", projectConfigSO.ChainId);
+        PlayerPrefs.SetString("Chain", projectConfigSO.Chain);
+        PlayerPrefs.SetString("Network", projectConfigSO.Network);
+        PlayerPrefs.SetString("RPC", projectConfigSO.Rpc);
+    }
 
     async private void OnConnected()
     {
         account = ConnectAccount();
-        while (account == "")
-        {
+        while (account == "") {
             await new WaitForSeconds(1f);
             account = ConnectAccount();
         };
